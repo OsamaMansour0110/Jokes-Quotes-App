@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.learining.JokesQuotes.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/savedJokesFragment"
+        android:name="com.learining.JokesQuotes.SavedJokesFragment"
+        android:label="Saved Jokes"/>
+
+
+    <fragment
+        android:id="@+id/QuotesFragment"
+        android:name="com.learining.JokesQuotes.QuotesFragment"
+        android:label="Quotes"/>
+
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.learining.JokesQuotes.ImageFragment"
+        android:label="Upload Image"/>
+
+</navigation>

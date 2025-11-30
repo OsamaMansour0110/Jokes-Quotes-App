@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/savedJokesFragment"
+        android:title="Saved Jokes"/>
+
+    <item
+        android:id="@+id/QuotesFragment"
+        android:title="Get Quotes"/>
+
+    <item
+        android:id="@+id/imageFragment"
+        android:title="Upload Image"/>
+</menu>

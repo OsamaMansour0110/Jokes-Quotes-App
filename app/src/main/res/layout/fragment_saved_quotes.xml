@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/QuoteQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/determinateBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:max="100"
+        android:visibility="gone"
+        android:progress="8" />
+
+    <TextView
+        android:id="@+id/TheAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/text_rectangle"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="#7A8089"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Quote"
+        android:layout_marginTop="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <ProgressBar
+            android:id="@+id/progress_Bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_weight="1"
+            android:max="5"
+            android:progressTint="#2CD17F"
+            android:minHeight="50dp"
+            android:indeterminate="false"
+            android:progress="0"/>
+
+        <TextView
+            android:id="@+id/progress_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="14sp"
+            android:text="0/5"/>
+
+    </LinearLayout>
+
+</LinearLayout>
