@@ -1,12 +1,12 @@
 package com.learining.JokesQuotes
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -19,14 +19,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
 
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val welcomed:TextView = findViewById(R.id.tvNotify)
+        val welcomed: TextView = findViewById(R.id.tvNotify)
         val notifyBox: LinearLayout = findViewById(R.id.notifyBox)
 
         val username = intent.getStringExtra("username")
@@ -56,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawerLayout)
 
         // Catch the navigationView for menu
-        val navView :NavigationView = findViewById(R.id.navView)
+        val navView: NavigationView = findViewById(R.id.navView)
 
         // Using as container to display fragments that detected by nav graph
         val navHostFragment =
@@ -77,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         // Click on item -> navigate or "replace" the fragment inside the Container
         NavigationUI.setupWithNavController(navView, navController)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, drawerLayout)
     }

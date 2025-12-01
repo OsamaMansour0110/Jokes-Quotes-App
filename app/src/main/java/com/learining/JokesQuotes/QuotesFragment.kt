@@ -10,15 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.learining.JokesQuotes.databinding.FragmentSavedQuotesBinding
 import com.learining.JokesQuotes.QuotesApi.QuotesViewModel
+import com.learining.JokesQuotes.databinding.FragmentSavedQuotesBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class QuotesFragment : Fragment() , OnClickListener{
+class QuotesFragment : Fragment(), OnClickListener {
     private var _binding: FragmentSavedQuotesBinding? = null
     private val binding get() = _binding!!
-    val viewModel : QuotesViewModel by viewModels()
+    val viewModel: QuotesViewModel by viewModels()
     var lastFetchTime = 0L
 
     override fun onCreateView(
@@ -33,26 +33,28 @@ class QuotesFragment : Fragment() , OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.quote.observe(viewLifecycleOwner) { QuoteState->
+        viewModel.quote.observe(viewLifecycleOwner) { QuoteState ->
             binding.QuoteQuestion.text = QuoteState.quote?.q ?: ""
             binding.TheAuthor.text = QuoteState.quote?.a ?: ""
 
             QuoteState.error?.let {
                 if (it.contains("429"))
-                    Toast.makeText(requireContext(),
+                    Toast.makeText(
+                        requireContext(),
                         "Please try in hour, server not able to receive request",
-                        Toast.LENGTH_LONG).show()
+                        Toast.LENGTH_LONG
+                    ).show()
                 else
                     Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
             }
         }
-        binding.TheAuthor.setOnClickListener (this)
+        binding.TheAuthor.setOnClickListener(this)
 
         binding.btnClick.setOnClickListener {
             if (binding.progressBar.progress < 5) {
                 resetTextView()
                 val now = System.currentTimeMillis()
-                if(now - lastFetchTime < 3000 ) {
+                if (now - lastFetchTime < 3000) {
                     Toast.makeText(
                         requireContext(), "Slow down bro, wait 3 seconds",
                         Toast.LENGTH_SHORT
@@ -76,8 +78,9 @@ class QuotesFragment : Fragment() , OnClickListener{
                     lastFetchTime = now
                     viewModel.fetchingQuote()
                 }
-            }else
-                Toast.makeText(requireContext(),"You already got 5 Quotes",Toast.LENGTH_LONG).show()
+            } else
+                Toast.makeText(requireContext(), "You already got 5 Quotes", Toast.LENGTH_LONG)
+                    .show()
         }
     }
 
@@ -86,17 +89,17 @@ class QuotesFragment : Fragment() , OnClickListener{
         _binding = null    // important to avoid memory leaks
     }
 
-    private fun resetTextView(){
+    private fun resetTextView() {
         binding.TheAuthor.background =
             ContextCompat.getDrawable(requireContext(), R.drawable.text_rectangle)
     }
 
     override fun onClick(v: View?) {
-        when (v?.id){
-            R.id.TheAuthor ->{
+        when (v?.id) {
+            R.id.TheAuthor -> {
                 resetTextView()
                 binding.TheAuthor.background =
-                    ContextCompat.getDrawable(requireContext(),R.drawable.selected_text_rectangle)
+                    ContextCompat.getDrawable(requireContext(), R.drawable.selected_text_rectangle)
             }
         }
     }

@@ -10,17 +10,17 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.learining.JokesQuotes.databinding.FragmentSavedJokesBinding
 import com.learining.JokesQuotes.Adapters.AdapterJoke
 import com.learining.JokesQuotes.RoomDB.DataBaseBuilder
 import com.learining.JokesQuotes.RoomDB.JokeResponse
 import com.learining.JokesQuotes.RoomDB.MyDatabase
+import com.learining.JokesQuotes.databinding.FragmentSavedJokesBinding
 import kotlinx.coroutines.launch
 
 class SavedJokesFragment : Fragment() {
     private var _binding: FragmentSavedJokesBinding? = null
     private val binding get() = _binding!!
-    private lateinit var  db : MyDatabase
+    private lateinit var db: MyDatabase
 
     private lateinit var adapter: AdapterJoke
 
@@ -40,15 +40,15 @@ class SavedJokesFragment : Fragment() {
         db = DataBaseBuilder.getInstance(requireContext())
         val jokesList = mutableListOf<JokeResponse>()
 
-        fun deleteJoke (jokeResponse: JokeResponse){
+        fun deleteJoke(jokeResponse: JokeResponse) {
             lifecycleScope.launch {
                 db.jokeDAO().deleteJoke(jokeResponse)
             }
         }
 
-        fun EditJoke (jokeResponse: JokeResponse){
-            val intent = Intent(requireContext(),JokeDetails::class.java)
-            intent.putExtra("Joke",jokeResponse)
+        fun EditJoke(jokeResponse: JokeResponse) {
+            val intent = Intent(requireContext(), JokeDetails::class.java)
+            intent.putExtra("Joke", jokeResponse)
             startActivity(intent)
             requireActivity().overridePendingTransition(
                 android.R.anim.fade_in,
@@ -70,7 +70,7 @@ class SavedJokesFragment : Fragment() {
         // Get All jokes from ROOM when Fragment opened for first time
         // Any Modify on data observe with LiveData will feel that and run this code again
         viewLifecycleOwner.lifecycleScope.launch {
-            db.jokeDAO().getAllJokes().observe(viewLifecycleOwner){saveJokes->
+            db.jokeDAO().getAllJokes().observe(viewLifecycleOwner) { saveJokes ->
                 jokesList.clear()
                 jokesList.addAll(saveJokes)
                 adapter.notifyDataSetChanged()

@@ -14,10 +14,10 @@ import com.learining.JokesQuotes.RoomDB.MyDatabase
 import com.learining.JokesQuotes.databinding.LoginPageBinding
 import kotlinx.coroutines.launch
 
-class LoginFragment:Fragment() {
-    private var _binding : LoginPageBinding? = null
+class LoginFragment : Fragment() {
+    private var _binding: LoginPageBinding? = null
     private val binding get() = _binding!!
-    private var db : MyDatabase? = null
+    private var db: MyDatabase? = null
 
 
     override fun onCreateView(
@@ -37,15 +37,15 @@ class LoginFragment:Fragment() {
         binding.btnLogin.setOnClickListener {
             lifecycleScope.launch {
                 val user = db!!.UserDAO().getUserByName(binding.etUsername.text.toString())
-                if(user == null){
+                if (user == null) {
                     binding.tilUsername.error = "No User Exist With this name"
                     return@launch
-                }else binding.tilUsername.error = null
+                } else binding.tilUsername.error = null
 
-                if (user.password != binding.etPassword.text.toString()){
+                if (user.password != binding.etPassword.text.toString()) {
                     binding.tilPassword.error = "Password is inCorrect"
                     return@launch
-                }else binding.tilPassword.error = null
+                } else binding.tilPassword.error = null
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 intent.putExtra("username", user.username)
@@ -65,8 +65,10 @@ class LoginFragment:Fragment() {
             .build()
 
         binding.tvSignup.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment,
-                null, options)
+            findNavController().navigate(
+                R.id.action_loginFragment_to_signUpFragment,
+                null, options
+            )
         }
     }
 

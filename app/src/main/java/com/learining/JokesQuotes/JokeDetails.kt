@@ -22,10 +22,12 @@ class JokeDetails : AppCompatActivity() {
         val bundle = Bundle()
         bundle.putSerializable("Joke", joke)
         detailsJokeFragment.arguments = bundle
-
+        
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
-                android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .setCustomAnimations(
+                android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+                android.R.anim.slide_in_left, android.R.anim.slide_out_right
+            )
             .replace(R.id.FragmentDetails, detailsJokeFragment).addToBackStack(null).commit()
     }
 }
