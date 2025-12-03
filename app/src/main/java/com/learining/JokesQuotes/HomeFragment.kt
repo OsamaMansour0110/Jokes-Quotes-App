@@ -8,22 +8,19 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.textfield.TextInputLayout
-import com.learining.JokesQuotes.databinding.FragmentHomeBinding
-import com.learining.JokesQuotes.RoomDB.JokeResponse
 import com.learining.JokesQuotes.JokesAPI.JokeViewModel
 import com.learining.JokesQuotes.RoomDB.DataBaseBuilder
+import com.learining.JokesQuotes.RoomDB.JokeResponse
 import com.learining.JokesQuotes.RoomDB.MyDatabase
-import kotlinx.coroutines.GlobalScope
+import com.learining.JokesQuotes.databinding.AddingJokeDialogBinding
+import com.learining.JokesQuotes.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
-class HomeFragment :Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var db: MyDatabase
     private val viewModel: JokeViewModel by viewModels()
     private var joke: JokeResponse? = null
@@ -45,7 +42,7 @@ class HomeFragment :Fragment() {
         // SET DB
         db = DataBaseBuilder.getInstance(requireContext())
         // ANY UPDATE ON JOKE -> RUN
-        viewModel.joke.observe(viewLifecycleOwner){jokeState->
+        viewModel.joke.observe(viewLifecycleOwner) { jokeState ->
             if (binding.jokeSetup.text.isNotEmpty())
                 binding.progressBar.visibility = if (jokeState.loading) View.VISIBLE else View.GONE
             binding.jokeSetup.text = jokeState.joke?.setup ?: ""
@@ -63,78 +60,82 @@ class HomeFragment :Fragment() {
         }
         // SAVING JOKE
         binding.saveJoke.setOnClickListener {
-            if(binding.jokeSetup.text.isEmpty())
+            if (binding.jokeSetup.text.isEmpty())
                 Toast.makeText(requireContext(), "Get joke first", Toast.LENGTH_LONG).show()
-            else if(binding.saveJoke.text == "SAVED ✔\uFE0F"){
-                Toast.makeText(requireContext(), "The joke already saved", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            else if (binding.saveJoke.text == "SAVED ✔\uFE0F") {
+                Toast.makeText(requireContext(), "The joke already saved", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 joke?.let { joke ->
                     // Add Joke
                     lifecycleScope.launch {
-                        val nJoke = JokeResponse(type = joke.type,
+                        val nJoke = JokeResponse(
+                            type = joke.type,
                             setup = joke.setup,
-                            punchline = joke.punchline)
+                            punchline = joke.punchline
+                        )
                         db.jokeDAO().addJoke(nJoke)
                     }
                     binding.saveJoke.text = "SAVED ✔\uFE0F"
                 }
-                Toast.makeText(requireContext(), "Joke Saved Successfully ✔\uFE0F", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Joke Saved Successfully ✔\uFE0F",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
         // ADD USER JOKE
-        fun showDialog(add : String){
-            val view = layoutInflater.inflate(R.layout.adding_joke_dialog, null)
-            val btnCancel = view.findViewById<Button>(R.id.cancelLayout_btn)
-            val btnAddJoke = view.findViewById<Button>(R.id.addJoke_btn)
-            val setUp = view.findViewById<EditText>(R.id.addSetup_input)
-            val punchLine = view.findViewById<EditText>(R.id.addPunchline_input)
-            val setLayout = view.findViewById<TextInputLayout>(R.id.addSetUp_layout)
-            val punLayout = view.findViewById<TextInputLayout>(R.id.addPunchline_layout)
-
-            val dialog = AlertDialog.Builder(requireContext()).setView(view).create()
+        fun showDialog() {
+            val binding: AddingJokeDialogBinding = AddingJokeDialogBinding.inflate(layoutInflater)
+            val dialog = AlertDialog.Builder(requireContext()).setView(binding.root).create()
+            dialog.show()
             dialog.setCanceledOnTouchOutside(true)
 
-            btnAddJoke.text = add
-            btnAddJoke.setOnClickListener {
+            binding.addJokeBtn.text = "Add"
+            binding.addJokeBtn.setOnClickListener {
                 var hasError = false
 
-                if (setUp.text.isEmpty()) {
-                    setLayout.error = "Can't be empty"
+                if (binding.addSetupInput.text?.isEmpty() == true) {
+                    binding.addSetUpLayout.error = "Can't be empty"
                     hasError = true
-                } else setLayout.error = null
+                } else binding.addSetUpLayout.error = null
 
-                if (punchLine.text.isEmpty()) {
-                    punLayout.error = "Can't be empty"
+                if (binding.addPunchlineInput.text?.isEmpty() == true) {
+                    binding.addPunchlineLayout.error = "Can't be empty"
                     hasError = true
-                } else punLayout.error = null
+                } else binding.addPunchlineLayout.error = null
 
                 if (hasError) return@setOnClickListener
 
                 // Coroutine stop when lifecycle end
                 lifecycleScope.launch {
-                    val joke = JokeResponse(type = "user joke",
-                        setup = setUp.text.toString(),
-                        punchline = punchLine.text.toString())
+                    val joke = JokeResponse(
+                        type = "user joke",
+                        setup = binding.addSetupInput.text.toString(),
+                        punchline = binding.addPunchlineInput.text.toString()
+                    )
                     db.jokeDAO().addJoke(joke)
                 }
-                btnAddJoke.setBackgroundColor(Color.parseColor("#4CAF50"))
-                btnAddJoke.text = "Added ✔\uFE0F"
-                Toast.makeText(requireContext(), "Joke Added Successfully ✔\uFE0F", Toast.LENGTH_SHORT).show()
+                binding.addJokeBtn.setBackgroundColor(Color.parseColor("#4CAF50"))
+                binding.addJokeBtn.text = "Added ✔\uFE0F"
+                Toast.makeText(
+                    requireContext(),
+                    "Joke Added Successfully ✔\uFE0F",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Handler(Looper.getMainLooper()).postDelayed({
                     dialog.dismiss()
-                },500)
+                }, 500)
             }
 
-            btnCancel.setOnClickListener {
+            binding.cancelLayoutBtn.setOnClickListener {
                 dialog.dismiss()
             }
-
-            dialog.show()
         }
 
-        binding.AddMyOwnJoke.setOnClickListener { showDialog("ADD") }
+        binding.AddMyOwnJoke.setOnClickListener { showDialog() }
     }
 
     override fun onDestroyView() {

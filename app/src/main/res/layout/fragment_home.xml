@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0F2F1">
@@ -21,96 +19,96 @@
                 android:id="@+id/titleJokes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Unlimited Jokes"
-                android:textSize="34sp"
-                android:textStyle="bold"
-                android:textColor="#00695C"
-                android:fontFamily="sans-serif-condensed"
-                android:letterSpacing="0.05"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/cardJoke"/>
+                android:fontFamily="sans-serif-condensed"
+                android:letterSpacing="0.05"
+                android:text="Unlimited Jokes"
+                android:textColor="#00695C"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/cardJoke"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardJoke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="28dp"
                 app:cardElevation="12dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@id/titleJokes"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleJokes"
                 app:layout_constraintVertical_bias="0.4">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:padding="32dp"
-                    android:gravity="center_horizontal">
+                    android:padding="32dp">
 
                     <ProgressBar
                         android:id="@+id/progressBar"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:visibility="gone"
+                        android:layout_marginBottom="24dp"
                         android:indeterminateTint="#009688"
-                        android:layout_marginBottom="24dp"/>
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/jokeSetup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="#212121"
+                        android:layout_marginBottom="16dp"
                         android:gravity="center"
                         android:lineSpacingExtra="4dp"
-                        android:layout_marginBottom="16dp"/>
+                        android:textColor="#212121"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/jokePunchline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="italic"
-                        android:textColor="#546E7A"
+                        android:layout_marginBottom="32dp"
                         android:gravity="center"
-                        android:layout_marginBottom="32dp"/>
+                        android:textColor="#546E7A"
+                        android:textSize="20sp"
+                        android:textStyle="italic" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/saveJoke"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
                             android:text="Save"
                             android:textColor="#00796B"
-                            app:strokeColor="#00796B"
                             app:cornerRadius="16dp"
-                            android:layout_marginEnd="8dp"/>
+                            app:strokeColor="#00796B" />
 
                         <Button
                             android:id="@+id/btnClick"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:text="Next Joke"
                             android:textColor="@android:color/white"
                             app:backgroundTint="#009688"
-                            app:cornerRadius="16dp"
-                            android:layout_marginStart="8dp"/>
+                            app:cornerRadius="16dp" />
 
                     </LinearLayout>
 
@@ -128,10 +126,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:contentDescription="Add Joke"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:tint="@android:color/white"
         app:backgroundTint="#00796B"
-        app:elevation="6dp"/>
+        app:elevation="6dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

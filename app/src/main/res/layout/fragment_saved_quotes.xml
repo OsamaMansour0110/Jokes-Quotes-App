@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -23,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="7dp"
         android:max="100"
-        android:visibility="gone"
-        android:progress="8" />
+        android:progress="8"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/TheAuthor"
@@ -41,27 +40,27 @@
         android:id="@+id/btnClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next Quote"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="Next Quote" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal">
 
         <ProgressBar
             android:id="@+id/progress_Bar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleHorizontal"
             android:layout_weight="1"
-            android:max="5"
-            android:progressTint="#2CD17F"
-            android:minHeight="50dp"
             android:indeterminate="false"
-            android:progress="0"/>
+            android:max="5"
+            android:minHeight="50dp"
+            android:progress="0"
+            android:progressTint="#2CD17F" />
 
         <TextView
             android:id="@+id/progress_count"
@@ -69,8 +68,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="14sp"
-            android:text="0/5"/>
+            android:text="0/5"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

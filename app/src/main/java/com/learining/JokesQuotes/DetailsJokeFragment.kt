@@ -21,7 +21,7 @@ class DetailsJokeFragment : Fragment() {
 
     private var _binding: FragmentDetailsPageBinding? = null
     private val binding get() = _binding!!
-
+    
     private lateinit var db: MyDatabase
     private var joke: JokeResponse? = null
 

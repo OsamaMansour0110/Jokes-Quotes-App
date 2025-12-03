@@ -2,48 +2,40 @@ package com.learining.JokesQuotes.Adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.learining.JokesQuotes.RoomDB.JokeResponse
-import com.learining.JokesQuotes.R
-import java.util.Locale
+import com.learining.JokesQuotes.databinding.JokeCardInListBinding
 
-class AdapterJoke (
-    private val jokeList:List<JokeResponse>,
-    private val onDelete:(JokeResponse) -> Unit,
-    private val onEdit:(JokeResponse) -> Unit) :
+class AdapterJoke(
+    private val jokeList: List<JokeResponse>,
+    private val onDelete: (JokeResponse) -> Unit,
+    private val onEdit: (JokeResponse) -> Unit
+) :
     RecyclerView.Adapter<AdapterJoke.JokeViewHolder>() {
 
     private var filteredList = jokeList
 
     // Connect all card views IDs with VALs
-    inner class JokeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val setUp : TextView = itemView.findViewById(R.id.setUpInCard)
-        val punchline : TextView = itemView.findViewById(R.id.punchlineInCard)
-        val btnDelete : Button = itemView.findViewById(R.id.deleteJokeButton)
-        val btnEdit : Button = itemView.findViewById(R.id.modifyJokeButton)
-    }
+    inner class JokeViewHolder(val binding: JokeCardInListBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    // Take card and inflate it to view
+    // Binding Card Layout and Return Object From JokeViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.joke_card_in_list, parent,false)
-        return JokeViewHolder(view)
+        val binding =
+            JokeCardInListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return JokeViewHolder(binding)
     }
 
     // Using viewHolder variables and list to displaying
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
         val joke = filteredList[position]
-        holder.setUp.text = joke.setup
-        holder.punchline.text = joke.punchline
-
-        holder.btnDelete.setOnClickListener {
+        holder.binding.setUpInCard.text = joke.setup
+        holder.binding.punchlineInCard.text = joke.punchline
+        holder.binding.deleteJokeButton.setOnClickListener {
             onDelete(joke)
         }
-        holder.btnEdit.setOnClickListener {
+        holder.binding.modifyJokeButton.setOnClickListener {
             onEdit(joke)
         }
     }

@@ -2,8 +2,8 @@ package com.learining.JokesQuotes
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.learining.JokesQuotes.databinding.ActivityJokeDetailsBinding
 import com.learining.JokesQuotes.RoomDB.JokeResponse
+import com.learining.JokesQuotes.databinding.ActivityJokeDetailsBinding
 
 class JokeDetails : AppCompatActivity() {
 
@@ -22,12 +22,16 @@ class JokeDetails : AppCompatActivity() {
         val bundle = Bundle()
         bundle.putSerializable("Joke", joke)
         detailsJokeFragment.arguments = bundle
-        
+
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(
                 android.R.anim.slide_in_left, android.R.anim.slide_out_right,
                 android.R.anim.slide_in_left, android.R.anim.slide_out_right
             )
             .replace(R.id.FragmentDetails, detailsJokeFragment).addToBackStack(null).commit()
+        /*
+        .addToBackStack : Navigate Backward to last Activity "in this case when you're in Fragment Details
+                             ,The Last Activity is this activity = jokeDetailsActivity"
+        */
     }
 }
